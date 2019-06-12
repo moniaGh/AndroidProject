@@ -203,7 +203,7 @@ the request
 
             GetData service = RetrofitClient.getRetrofitInstance().create(GetData.class);
 
-            Call<AccessToken> call = service.getAccess("password","*","SJGZDWXOPLJZLBDQGACCAGAVWSHORHJK","6734914665b5258c7a2eb01077382585","etudiant@isi.utm.tn","pm2019");
+            Call<AccessToken> call = service.getAccess("private information");
 
 //Execute the request asynchronously//
             showProgress(true);
