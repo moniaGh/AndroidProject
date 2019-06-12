@@ -96,17 +96,7 @@ the request
 
 
             /*   JSONObject postparams = new JSONObject();
-        try {
-            postparams.put("grant_type", "password");
-            postparams.put("scope", "*");
-            postparams.put("grant_type", "password");
-            postparams.put("client_id", "SJGZDWXOPLJZLBDQGACCAGAVWSHORHJK");
-            postparams.put("client_secret", "6734914665b5258c7a2eb01077382585");
-            postparams.put("username", "etudiant@isi.utm.tn");
-            postparams.put("password","pm2019");
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
+     
   
         JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST,
                 url, postparams,
