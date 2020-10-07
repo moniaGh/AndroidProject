@@ -41,14 +41,12 @@ public class myForm extends AppCompatActivity {
 
         final String pro_uid = intent.getStringExtra("pro_uid");
         String tas_uid = intent.getStringExtra("tas_uid");
-        Log.e("xxxxxxxxxx",pro_uid);
-        Log.e("xxxxxxxxxx1",tas_uid);
+        
 
         SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(this);
         String myToken = null;
 
         myToken = pref.getString(myToken,null);
-        Log.e("hhhhh",myToken);
         Call<List<stepOne>> call = service.getStepOne(pro_uid,tas_uid,"Bearer "+myToken);
 //Execute the request asynchronously//
 
@@ -62,16 +60,15 @@ public class myForm extends AppCompatActivity {
 
             public void onResponse(Call<List<stepOne>> call, Response<List<stepOne>> response) {
 Log.e("etat",response.message());
-Log.e("hhhhhh3",response.body().get(0).getStep_uid_obj());
  myStepUid =response.body().get(0).getStep_uid_obj();
 
 
 
  /********************************/
  //déuxieme appel
-                Log.e("hhhhhhhhhhh6", myStepUid);
-                Log.e("hhhhhhhhhhh6", pro_uid);
-                Log.e("hhhhhhhhhhh6", finalMyToken);
+                Log.e("myStepUid:", myStepUid);
+                Log.e("pro_uid:", pro_uid);
+                Log.e("finalMyToken:", finalMyToken);
 
 
                 Call<dynaContent> call1 = service.getDynCon(pro_uid, myStepUid,"Bearer "+ finalMyToken);
@@ -85,7 +82,7 @@ Log.e("hhhhhh3",response.body().get(0).getStep_uid_obj());
 
                     public void onResponse(Call<dynaContent> call, Response<dynaContent> response) {
 
-                        Log.e("hhhhhh20", String.valueOf(response.code()));
+                        Log.e("msg", String.valueOf(response.code()));
                         getMyForm(response.body().getDyn_content());
                     }
 
@@ -95,8 +92,7 @@ Log.e("hhhhhh3",response.body().get(0).getStep_uid_obj());
 //Handle execution failures//
 
                     public void onFailure(Call<dynaContent> call, Throwable throwable) {
-                        Log.e("saker fomel","saker");
-                        Log.e("3lech",throwable.getMessage()+throwable.getStackTrace());
+                        Log.e("error:",throwable.getMessage()+throwable.getStackTrace());
 
 //If the request fails, then display the following toast//
 
@@ -111,8 +107,7 @@ Log.e("hhhhhh3",response.body().get(0).getStep_uid_obj());
 //Handle execution failures//
 
             public void onFailure(Call<List<stepOne>> call, Throwable throwable) {
-                Log.e("saker fomel","saker");
-                Log.e("3lech",throwable.getMessage()+throwable.getStackTrace());
+                Log.e("error:",throwable.getMessage()+throwable.getStackTrace());
 
 //If the request fails, then display the following toast//
 
@@ -121,7 +116,7 @@ Log.e("hhhhhh3",response.body().get(0).getStep_uid_obj());
 
 
         /********************************************************/
-//Log.e("hhhhhhhhhhhhhhhhhhhh10",myStepUid);
+
 
 
 
@@ -141,7 +136,7 @@ String cont=content ;
     } catch (JSONException e) {
         e.printStackTrace();
     }
-    Log.e("bbbbbb", jsonObj.toString());
+    Log.e("jsonObj:", jsonObj.toString());
     JSONArray myArray = null;
     try {
         myArray = jsonObj.getJSONArray("items");
@@ -149,7 +144,7 @@ String cont=content ;
         e.printStackTrace();
     }
     if (myArray != null) {
-        Log.e("bbbbbb1", myArray.toString());
+        Log.e("info1", myArray.toString());
     }
 
     JSONArray otherArray = null;
@@ -167,7 +162,6 @@ String cont=content ;
         JSONArray three = null;
         try {
             three = two.getJSONArray("items");
-            Log.e("bbbbbbbbbbbb7", three.toString());
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -176,7 +170,6 @@ String cont=content ;
             JSONArray four = null;
             try {
                 four = three.getJSONArray(j);
-                Log.e("bbbbbbbbbbbb8", String.valueOf(four.toString()));
 
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -184,10 +177,8 @@ String cont=content ;
             for (int k = 0; k < four.length(); k++) {
                 try {
 
-                    Log.e("bbbbbbbb9", four.getJSONObject(k).toString());
                     String myInput = null;
 
-                    Log.e("bbbbbbbb10", (String) four.getJSONObject(k).get("type"));
                     myInput = (String) four.getJSONObject(k).get("type");
                     if (myInput != null) {
                         switch (myInput) {
